@@ -41,6 +41,16 @@ server.put('/note/edit/:id', (req, res) => {
       else res.status(404).json({ error: 'The note with the specified ID does not exist.' });
     })
     .catch(err => res.status(500).json(err));
-})
+});
+
+server.delete('/note/delete/:id', (req, res) => {
+  const { id } = req.params;
+  notes.deleteNote(id)
+    .then((deleted) => {
+      if (deleted) res.status(200).json(deleted);
+      else res.status(404).json({ error: 'The note with the specified ID does not exist.' });
+    })
+    .catch(err => res.status(500).json(err));
+});
 
 module.exports = server;
