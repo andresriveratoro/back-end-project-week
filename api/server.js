@@ -12,4 +12,14 @@ server.get('/note/get/all', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
+server.get('/note/get/:id', (req, res) => {
+  const { id } = req.params;
+  notes.getNoteById(id)
+    .then((row) => {
+      if (row.length) res.status(200).json(row);
+      else res.status(404).json({ error: 'A note with the specified ID does not exist.' });
+    })
+    .catch(err => res.status(500).json(err));
+});
+
 module.exports = server;
