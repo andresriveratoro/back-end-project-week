@@ -22,4 +22,14 @@ server.get('/note/get/:id', (req, res) => {
     .catch(err => res.status(500).json(err));
 });
 
+server.post('/note/create', (req, res) => {
+  const { title, textBody } = req.body;
+  if (!title || !textBody) res.status(400).json({ error: 'Missing required field.' });
+  else {
+    notes.createNote({ title, textBody })
+      .then(id => res.status(201).json(id))
+      .catch(err => res.status(500).json(err));
+  }
+});
+
 module.exports = server;
