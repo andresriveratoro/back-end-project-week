@@ -11,7 +11,7 @@ const Note = props => {
       : note.textBody;
   return (
     <div className="note">
-      <NavLink to={`/view/${note._id}`}>
+      <NavLink to={`/view/${note.id}`}>
         <h3>{note.title}</h3>
       </NavLink>
       <p>{text}</p>
